@@ -1,0 +1,25 @@
+<div class="container" v-if="item.tag == 'title'">
+    <div class="title-container">
+        <input type="text" name="form-title" class="form-title" placeholder="Untitled Form">
+        <input type="text" name="form-description" class="form-description" placeholder="Form Description">
+    </div>
+</div>
+<div class="container" v-if="item.tag == 'short'">
+    <div class="section-div short-section active" data-id="6400" question-type="short">
+        <div class="grid-container">
+            <div class="grid-div left"><input class="sub-title" type="text" placeholder="Question">
+                <p class="label">Short answer question</p>
+            </div>
+            <div class="grid-div right"></div>
+        </div>
+        <div class="icons-container">
+            <a class="delete-div" title="Delete question">
+                <span class="material-icons md-dark">delete</span>
+            </a>
+            <span class="text">Required</span>
+            <label class="switch"><input type="checkbox" data-isrequired="false">
+					<span class="slider round"></span>
+				</label>
+        </div>
+    </div>
+</div>

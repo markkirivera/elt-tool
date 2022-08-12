@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Builder - Vue JS</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="container">
+            <a>
+                <span class="material-icons light-md">insert_drive_file</span>
+            </a>
+        </div>
+    </nav>
+
+    <div id="app">
+
+        <!-- Sections  -->
+
+
+        <!-- A. If we only have one section  -->
+        <template v-if="qData.qSection.length == 1">
+			
+			<section data-secid="{{ qData.qSection.length }}">
+				
+				<div class="container">
+					<div class="title-container">
+						<input type="text" name="form-title" class="form-title" placeholder="Untitled Form">
+						<input type="text" name="form-description" class="form-description" placeholder="Form Description">
+					</div>
+				</div>
+
+				<template v-for="(item, index) in qData.qSection[0].qForm">
+
+					<!-- <div class="container" v-if="item.tag == 'title'">
+						<div class="title-container">
+							<input type="text" name="form-title" class="form-title" placeholder="Untitled Form">
+							<input type="text" name="form-description" class="form-description" placeholder="Form Description">
+						</div>
+					</div> -->
+
+					<div class="container" v-if="item.tag == 'short'">
+						<div class="section-div short-section active" data-id="6400" question-type="short">
+							<div class="grid-container">
+								<div class="grid-div left"><input class="sub-title" type="text" placeholder="Question">
+									<p class="label">Short answer question</p>
+								</div>
+								<div class="grid-div right"></div>
+							</div>
+							<div class="icons-container">
+								<a class="delete-div" title="Delete question">
+								<span class="material-icons md-dark">delete</span>
+								</a>
+								<span class="text">Required</span>
+								<label class="switch"><input type="checkbox" data-isrequired="false">
+										<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+				</template>
+        </section>
+
+        </template>
+
+
+        <!-- B. If there are more than one sections -->
+        <template v-else-if="qData.qSection.length > 1">
+
+			<!-- B-1. Load section titles -->
+			<template v-for="(item, ind) in qData.qSection">
+
+				<!-- First section  -->
+				<!-- No section title, proceed to questions -->
+				<template v-if="ind == 0">
+					<section data-secid=" {{ind}} ">
+						
+						<div class="container">
+							<div class="section-header">
+								<span class="section-count">Section {{ ind + 1}} of {{ qData.qSection.length }} </span>
+								<input type="text" name="form-title" class="title" placeholder="Untitled Section">
+								<input type="text" name="form-description" class="description" placeholder="Description">
+							</div>
+						</div>
+
+						<template v-for="(itm, index) in qData.qSection[0].qForm">
+						
+
+							<div class="container" v-if="itm.tag == 'short'">
+								<div class="section-div short-section active" data-id="6400" question-type="short">
+									<div class="grid-container">
+										<div class="grid-div left"><input class="sub-title" type="text" placeholder="Question">
+											<p class="label">Short answer question</p>
+										</div>
+										<div class="grid-div right"></div>
+									</div>
+									<div class="icons-container">
+										<a class="delete-div" title="Delete question">
+											<span class="material-icons md-dark">delete</span>
+										</a>
+										<span class="text">Required</span>
+										<label class="switch"><input type="checkbox" data-isrequired="false">
+												<span class="slider round"></span>
+											</label>
+									</div>
+								</div>
+							</div>
+	
+						</template>
+        </section>
+        </template>
+
+        <!-- Other sections  -->
+        <template v-else="ind > 0">
+					<section data-secid="ind">
+
+						<div class="container">
+							<div class="section-header">
+								<span class="section-count">Section {{ ind + 1 }} of {{ qData.qSection.length }} </span>
+								<input class="title" placeholder="Untitled Section">
+								<input class="description" placeholder="Description">
+								<div class="icons-container">
+									<a class="delete-section" title="Delete Section">
+										<span class="material-icons md-dark">delete</span>
+									</a>
+								</div>
+							</div>
+						</div>
+	
+						<template v-for="(itm, index) in qData.qSection[ind].qForm">
+							
+							<div class="container" v-if="itm.tag == 'title'">
+								<div class="title-container">
+									<input type="text" name="form-title" class="form-title" placeholder="Untitled Form">
+									<input type="text" name="form-description" class="form-description" placeholder="Form Description">
+								</div>
+							</div>
+							<div class="container" v-if="itm.tag == 'short'">
+								<div class="section-div short-section active" data-id="6400" question-type="short">
+									<div class="grid-container">
+										<div class="grid-div left"><input class="sub-title" type="text" placeholder="Question">
+											<p class="label">Short answer question</p>
+										</div>
+										<div class="grid-div right"></div>
+									</div>
+									<div class="icons-container">
+										<a class="delete-div" title="Delete question">
+											<span class="material-icons md-dark">delete</span>
+										</a>
+										<span class="text">Required</span>
+										<label class="switch"><input type="checkbox" data-isrequired="false">
+												<span class="slider round"></span>
+											</label>
+									</div>
+								</div>
+							</div>
+	
+						</template>
+
+        </section>
+        </template>
+
+        </template>
+
+        </template>
+
+        <!-- <template v-for="(item, index) in qData.qSection[0].qForm">
+		</template> -->
+
+        <div class="options-container container">
+            <ul>
+                <!-- <li>
+                    <a @click="addForm('title')">
+                        <span class="material-icons">title</span>
+                        <span>Title</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a @click="addForm('short')">
+                        <span class="material-icons">notes</span>
+                        <span>Short</span>
+                    </a>
+                </li>
+                <li>
+                    <a @click="addForm('section')">
+                        <span class="material-icons">crop_7_5</span>
+                        <span>Section</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- <div class="container">
+            <div class="title-container">
+                <input type="text" name="form-title" class="form-title" placeholder="Untitled Form">
+                <input type="text" name="form-description" class="form-description" placeholder="Form Description">
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-div short-section active" data-id="6400" question-type="short">
+                <div class="grid-container">
+                    <div class="grid-div left"><input class="sub-title" type="text" placeholder="Question">
+                        <p class="label">Short answer question</p>
+                    </div>
+                    <div class="grid-div right"></div>
+                </div>
+                <div class="icons-container">
+                    <a class="delete-div" title="Delete question">
+                        <span class="material-icons md-dark">delete</span>
+                    </a>
+                    <span class="text">Required</span>
+                    <label class="switch"><input type="checkbox" data-isrequired="false">
+                            <span class="slider round"></span>
+                        </label>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="container">
+            <button type="button" @click="createForm">Create Form</button>
+        </div>
+
+        <br>
+
+
+        <!-- <h1>Component</h1> -->
+        <component v-for="(component, index) in components" :key="index" :is="component" />
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3.0.5"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
